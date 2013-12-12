@@ -1,7 +1,7 @@
 /*
 Flogger provides a simple wrapper around go's base logging library to provide
-logging levels.  Further documentation can be found at:
-somewhere.... 
+logging levels.  Further documentation can be found at 
+https://github.com/zdannar/flogger
 */
 package flogger
 

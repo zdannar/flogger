@@ -7,7 +7,7 @@ Flogger provides a simple wrapper around go's base logging module to provide
 logging levels.  Flogger provides the following features.
 
 * Logging levels capable of overloading output in desired language.
-* Allow redirection of stdout and sterr to capture panics and other messages. 
+* Allow redirection of stdout and stderr to capture panics and other messages. 
 * Other packages can import and use flogger without having to define a specific
   logger. 
 * If a logfile is not configured, output will log to stdout.
