@@ -18,7 +18,7 @@ logging levels.  Flogger provides the following features.
 package main
 
 import (
-    log "flogger"
+    log "github.com/zdannar/flogger"
 )
 
 const (
