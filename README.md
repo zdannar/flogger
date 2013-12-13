@@ -59,3 +59,7 @@ main.main()
 
 goroutine 2 [runnable]:
 ```
+
+###INSTALL
+
+go get github.com/zdannar/flogger
