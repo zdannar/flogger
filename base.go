@@ -16,7 +16,7 @@ const (
 
 const (
     STDOUT int = iota
-    STDERR int = iota
+    STDERR
 )
 
 var (
@@ -85,8 +85,9 @@ func Panic(args ...interface{}) {
 }
 
 // Calls f.RedirectStreams() on base logging object.
-func RedirectStreams() {
-   defLogr.RedirectStreams()
+func RedirectStreams() (error) {
+    err := defLogr.RedirectStreams()
+    return err
 }
 
 // Calls f.Debugf() on base logging object.
