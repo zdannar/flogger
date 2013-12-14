@@ -15,7 +15,7 @@ const (
 )
 
 const (
-    STDOUT int = iota
+    STDOUT = iota + 1
     STDERR
 )
 
