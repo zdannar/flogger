@@ -104,7 +104,6 @@ func (f *Flogger) flogf(level int, msg string, args ...interface{}) {
 // Redirects stdout and stderr to log file.  Very handy to catch the output of 
 // panics in your log file.
 func (f *Flogger) RedirectStreams() (error) {
-    fmt.Printf("DEBUGGING:..... %d\n", STDOUT)
     err := f.RedirectStream(STDOUT)
     if err != nil {
         return err
