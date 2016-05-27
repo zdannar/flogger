@@ -1,6 +1,6 @@
 /*
 Flogger provides a simple wrapper around go's base logging library to provide
-logging levels.  Further documentation can be found at 
+logging levels.  Further documentation can be found at
 https://github.com/zdannar/flogger
 */
 package flogger
@@ -9,7 +9,6 @@ import (
     "log"
     "os"
     "fmt"
-    "syscall"
 )
 
 // Returns a flogger.Flogger structure for logging.
@@ -31,7 +30,7 @@ type Flogger struct {
     lvlMap map[int]string
 }
 
-// Opens a file for flogger to log to.  
+// Opens a file for flogger to log to.
 func (f *Flogger) OpenFile(logPath string, openMode int, perms os.FileMode) (error) {
 
     f.lpath = logPath
@@ -43,7 +42,7 @@ func (f *Flogger) OpenFile(logPath string, openMode int, perms os.FileMode) (err
     return nil
 }
 
-// Flushes and closes file descriptor that flogger is logging to.  Should always be 
+// Flushes and closes file descriptor that flogger is logging to.  Should always be
 // called at the end of execution.
 func (f *Flogger) Close() error {
     if err := f.fd.Sync(); err != nil {
@@ -69,7 +68,7 @@ func (f *Flogger) appLevel(level int, msg string) string {
     return fmt.Sprintf(": %s : ", f.lvlMap[level]) + msg
 }
 
-// Base method that actually applies the levels and wraps log.Print, 
+// Base method that actually applies the levels and wraps log.Print,
 // log.Fatal, log.Panic
 func (f *Flogger) flog(level int, args ...interface{}) {
     if level < f.level { return }
@@ -85,7 +84,7 @@ func (f *Flogger) flog(level int, args ...interface{}) {
     }
 }
 
-// Base method that actually applies the levels and wraps log.Printf, 
+// Base method that actually applies the levels and wraps log.Printf,
 // log.Fatalf, log.Panicf
 func (f *Flogger) flogf(level int, msg string, args ...interface{}) {
     if level < f.level { return }
@@ -101,40 +100,22 @@ func (f *Flogger) flogf(level int, msg string, args ...interface{}) {
     }
 }
 
-// Redirects stdout and stderr to log file.  Very handy to catch the output of 
-// panics in your log file.
-func (f *Flogger) RedirectStreams() (error) {
-    err := f.RedirectStream(STDOUT)
-    if err != nil {
-        return err
-    }
-    err = f.RedirectStream(STDERR)
-    return err
-}
-
-// Redirects file descriptor to log file. 
-// Example: flogger.RedirectStream(flogger.STDERR)
-func (f *Flogger) RedirectStream(fd int) (error) {
-    err := syscall.Dup2(int(f.fd.Fd()), fd)
-    return err
-}
-
-// Logs to the debugging logging channel 
+// Logs to the debugging logging channel
 func (f *Flogger) Debug(args ...interface{}) {
    f.flog(DEBUG, args...)
 }
 
-// Logs to the info logging channel 
+// Logs to the info logging channel
 func (f *Flogger) Info(args ...interface{}) {
    f.flog(INFO, args...)
 }
 
-// Logs to the warning logging channel 
+// Logs to the warning logging channel
 func (f *Flogger) Warning(args ...interface{}) {
    f.flog(WARNING, args...)
 }
 
-// Logs to the error logging channel 
+// Logs to the error logging channel
 func (f *Flogger) Error(args ...interface{}) {
    f.flog(ERROR, args...)
 }

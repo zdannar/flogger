@@ -39,7 +39,7 @@ func Close() error {
     return defLogr.Close()
 }
 
-// Opens default logger's file for writing. 
+// Opens default logger's file for writing.
 func OpenFile(logPath string, openMode int, perms os.FileMode) (error) {
     return defLogr.OpenFile(logPath, openMode, perms)
 }
@@ -82,12 +82,6 @@ func Fatal(args ...interface{}) {
 // Calls f.Panic() on base logging object.
 func Panic(args ...interface{}) {
    defLogr.Panic(args...)
-}
-
-// Calls f.RedirectStreams() on base logging object.
-func RedirectStreams() (error) {
-    err := defLogr.RedirectStreams()
-    return err
 }
 
 // Calls f.Debugf() on base logging object.
